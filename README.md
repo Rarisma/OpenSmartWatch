@@ -1,0 +1,2 @@
+# OpenSmartWatch
+FOSS SmartWatch
