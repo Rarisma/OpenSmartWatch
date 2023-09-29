@@ -1,4 +1,4 @@
- t//Open Smart Watch Revision C (BEAUTIFUL STAR)
+ //Open Smart Watch Revision C (BEAUTIFUL STAR)
 //All Rights Reserved by Jake (Rarisma) (C) 2023 if you have recieved this privately.
 //This code is licensed under GNU GPL v3 if publically published.
 
@@ -13,10 +13,10 @@
 Adafruit_ST7789 Display = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
 
 //MPU6050
-#include <Adafruit_MPU6050.h>
-#include <Adafruit_Sensor.h>
-#include <Wire.h>
-Adafruit_MPU6050 MPU;
+//#include <Adafruit_MPU6050.h>
+//#include <Adafruit_Sensor.h>
+//#include <Wire.h>
+//Adafruit_MPU6050 MPU;
 bool MPUEnabled = false;
 
 //WiFi + NTP server sync.
