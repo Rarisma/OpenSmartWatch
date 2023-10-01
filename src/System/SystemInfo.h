@@ -3,6 +3,7 @@
 
 constexpr int Version[] = {1, 0, 0};
 constexpr const char* ReleaseName = "Exhibition Prototype Ultra";
+constexpr const char* Branch = "MINIMA";
 
 /* ReleaseName Idea's / history
     There's no hard rules on what can be a version name but it should relate to
@@ -25,5 +26,6 @@ constexpr const char* ReleaseName = "Exhibition Prototype Ultra";
     Hiscore (Pandas eyes.)
     Overkill (riot)
     All these things (mario resto)
+    Aria Of the Soul (Atlus)
 */
 #endif 

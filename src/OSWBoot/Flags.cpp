@@ -6,6 +6,7 @@
 //While none of these flags are dangerous in the sense that it
 //could break your hardware, you should still be careful, or you may need to
 //reflash, report odd scenarios when changing flags, these are meant to be changed.
+#include <Arduino.h>
 
 //WiFi/Bluetooth Connection Settings
 bool AllowWiFi = true; //Enables WiFi
@@ -14,8 +15,8 @@ bool AllowNetworkTimeProtocol = true; //Automatically get the time using WiFi. (
 
 //Default WiFi SSID and Password, useful for testing
 bool UseDefaultCreds = true; //Enables automatic connection
-char* DefaultWiFiSSID = "DREAMLAND"; // SSID to connect to.
-char* DefaultWiFiPass = "NIGHTMARE"; // Password to SSID.
+String DefaultWiFiSSID = "DREAMLAND"; // SSID to connect to.
+String DefaultWiFiPass = "NIGHTMARE"; // Password to SSID.
 
 //Geolocation Settings
 bool EnableGeolocation = true; //Allows triangulation through router names (uses google maps API)
@@ -26,6 +27,9 @@ int GeolocationCooldown = 900; //How often to ping geo api's in the background.
 int DelayBoot = 5000; //delays boot by value in ms, useful for display testing.
 bool ShowSysLogOnDisplay = true; //Shows SysLog messages on screen during boot.
 
+//Time Settings
+int GMTOffset = 0; //Seconds offset from GMT (For example GMT+1/CEST would be 3600)
+bool DaylightSavings = true; //Set to true if you are in a reigion observing DST/BST ect.
 
 
 //Experemental Settings
@@ -33,3 +37,17 @@ bool ShowSysLogOnDisplay = true; //Shows SysLog messages on screen during boot.
 bool EnableOTAMenu = true; //Allows OTA's. //Not implemented.
 bool EnableSDCard = true; //Scans for SDCards on boot.
 int NumberOfButtons = 4; //Ammount of physical buttons //Not Implemented.
+
+
+
+//===HARDWARE INFO===
+#include <Display\DisplayType.h>
+int DisplayWidth = 240;  //Display Width in pixels
+int DisplayHeight = 280; //Display Height in pixels
+DisplayType Display = DisplayType::AdaST7789; //Display Vendor/Type
+
+//ST7789 Pins
+int DisplayCSPin = 15;
+int DisplayRSTPin = 32;
+int DisplayDCPin = 14;
+int DisplaySD = 27;
