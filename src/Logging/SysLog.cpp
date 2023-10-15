@@ -1,11 +1,10 @@
-//SysLog (formerly MaviLog)
-//Handles logging.
+//SysLog - Deals with logging.
 
 #include "Arduino.h"
 #include "LogLevel.h"
 
-bool SerialInitalised = false;
-
+bool SerialInitalised = false; //Will initalise serial and then set to true.
+bool LogToDisplay = false; //Shows log messages on display.
 
 //Logs a message to all available sources.
 void Log(String Message, LogLevel level) {
@@ -26,7 +25,7 @@ void Log(String Message, LogLevel level) {
             Prefix += "ERRO";
             break;
         case LogLevel::Fatal:
-            Prefix += "FUCK";
+            Prefix += "FTAL";
             break;
     }
 

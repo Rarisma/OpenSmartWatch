@@ -4,13 +4,13 @@ FOSS SmartWatch with arduino hardware.
 # Roadmap
 Progenitor Prototype
  - ~~WiFi~~
- - Basic home screen
+ - ~~Basic home screen~~
  - Alarms
  - Basic File browsing
  - On Screen keyboard?
  - ~~Network Time Syncronisation~~
  - Proper sleeping of smartwatch using MPU
- - Weather reading
+ - ~~Weather reading~~
 
 MINMA Prototype 
   - Actual Hardware spec

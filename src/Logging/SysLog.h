@@ -13,6 +13,8 @@ enum class LogLevel {
     Fatal
 };
 
+extern bool LogToDisplay;
+
 void Log(String Message, LogLevel level);
 
 #endif

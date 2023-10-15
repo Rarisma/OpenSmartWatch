@@ -1,13 +1,15 @@
+#include <OSWBoot\OSWBoot.h>
 #include <WiFi.h>
 #include <Arduino.h>
 #include <System\SystemInfo.h>
 #include <Logging\SysLog.h>
 
-void setup() {
 
+
+void setup() {
+  Initalise();   
 }
 
 void loop() {
-  Log("Hello - " + String(ReleaseName), LogLevel::Info);
-  //Serial.println("Hello - " + String(ReleaseName));
+
 }
