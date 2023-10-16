@@ -1,8 +1,8 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-constexpr int Version[] = {1, 0, 0};
-constexpr const char* ReleaseName = "Exhibition Prototype Ultra";
+constexpr int Version[] = {1, 1, 0};
+constexpr const char* ReleaseName = "Time Out";
 constexpr const char* Branch = "MINIMA";
 
 /* ReleaseName Idea's / history
@@ -15,7 +15,8 @@ constexpr const char* Branch = "MINIMA";
     Wannabe (Demon Dice) - Progenitor Final Revision
 
     ==MINIMA== 
-    Exhibition Prototype Ultra (K-Rino) - 1.0.0 (I really like this name)
+    1.0.0 - Exhibition Prototype Ultra (K-Rino) -  (I really like this name)
+    1.1.0 - Time Out (DJ Hoppa)
 
     Ideas
     Freeverse (Ekoh)

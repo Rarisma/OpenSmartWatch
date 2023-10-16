@@ -36,6 +36,7 @@ bool EnableOTAMenu = true; //Allows OTA's. //Not implemented.
 bool EnableSDCard = true; //Scans for SDCards on boot. // Not Implemented.
 int NumberOfButtons = 4; //Ammount of physical buttons //Not Implemented.
 bool WriteLogToSD = false; //Saves SysLog messages to the SD. //Not implemented.
+
 //===HARDWARE INFO===
 #include <Display\DisplayType.h>
 int DisplayWidth = 240;  //Display Width in pixels

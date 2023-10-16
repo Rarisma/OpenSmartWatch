@@ -2,6 +2,7 @@
 
 #include "Arduino.h"
 #include "LogLevel.h"
+#include "Display\Display.h"
 
 bool SerialInitalised = false; //Will initalise serial and then set to true.
 bool LogToDisplay = false; //Shows log messages on display.
@@ -10,22 +11,27 @@ bool LogToDisplay = false; //Shows log messages on display.
 void Log(String Message, LogLevel level) {
 
     //Gets relevant prefix.
-    String Prefix = "[";
+    String Prefix = "";
+    int Color = 0xFFFFFF; //RGB in hex after the 0x part.
     switch (level) {
         case LogLevel::Debug:
-            Prefix += "DBUG";
+            Prefix += "DBG";
+            Color = 0x332E3C;
             break;
         case LogLevel::Info:
-            Prefix += "INFO";
+            Prefix += "INF";
             break;
         case LogLevel::Warn:
-            Prefix += "WARN";
+            Prefix += "WRN";
+            Color =  0xDD6E42;
             break;
         case LogLevel::Error:
-            Prefix += "ERRO";
+            Prefix += "ERR";
+            Color = 0xC40B0B;
             break;
         case LogLevel::Fatal:
-            Prefix += "FTAL";
+            Prefix += "FTL";
+            Color = 0xCE1483;
             break;
     }
 
@@ -33,6 +39,11 @@ void Log(String Message, LogLevel level) {
     struct tm timeinfo;
     String Timestamp = String(timeinfo.tm_mday) + "/" + String(timeinfo.tm_mon) + " " + 
     String(timeinfo.tm_hour) + ":" + String(timeinfo.tm_min) + ":" + String(timeinfo.tm_sec);
+
+    if (LogToDisplay)
+    {
+        ShowLog(Message, Prefix, Color);
+    }
 
     //Start serial if it hasn't already.
     if (!SerialInitalised) 
@@ -42,5 +53,5 @@ void Log(String Message, LogLevel level) {
     }
 
     //Log to Serial
-    Serial.println(Prefix + " " + Timestamp + "]  -  " + Message );
+    Serial.println("[" + Prefix + " " + Timestamp + "]  -  " + Message );
 }

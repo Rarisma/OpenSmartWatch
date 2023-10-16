@@ -14,22 +14,23 @@ void InitaliseDisplay(){
     switch (Display)
     {
         case DisplayType::AdaST7789: //Standard Adafruit ST7789 Display
-            Log("Display initalising as Adafruit ST7789", LogLevel::Info);
+            Log("Display initalising as ST7789", LogLevel::Info);
             ST7789.init(240, 280);
             ST7789.fillScreen(ST77XX_BLACK);
             break;
     }
-
-    Log("Display initalised.", LogLevel::Info);
+    
+    Log("Disp initalised.", LogLevel::Info);
+    LogToDisplay = true;
 }
 
 void PrintHomeScreen(){
+    LogToDisplay = false;
     switch (Display)
     {
         case DisplayType::AdaST7789: //Standard Adafruit ST7789 Display
             ST7789.setTextColor(ST77XX_WHITE, ST77XX_BLACK);  
             ST7789.setCursor(40,20);
-            ST7789.println("Hello!");
             break;
     }
 }
@@ -40,9 +41,34 @@ void PrintBootScreen(){
         case DisplayType::AdaST7789: //Standard Adafruit ST7789 Display
             ST7789.setTextColor(ST77XX_WHITE, ST77XX_BLACK);  
             ST7789.setCursor(40,20);
-            ST7789.println("Welcome to OpenSW - " + String(Branch)  + "!");
-            ST7789.println("Ver: " + String(ReleaseName) + "  " + Version[0] + "." + Version[1] + "." + Version[2]);
+            ST7789.println("OpenSW - " + String(Branch)  + "!");
+            ST7789.println(" V: " + String(ReleaseName) + "  " + Version[0] + "." + Version[1] + "." + Version[2]);
             break;
     }
+}
 
+/// @brief This prints a line to the display
+/// @param Message Message to be shown
+void PrintToDisplay (String Message){
+    switch (Display)
+    {
+        case DisplayType::AdaST7789: //Standard Adafruit ST7789 Display
+            ST7789.println(Message);
+            break;
+    }
+}
+
+/// @brief This prints a syslog message to the display with coloring.
+/// @param Message Message to be shown
+void ShowLog (String Message, String Level, int Color){
+    switch (Display)
+    {
+        case DisplayType::AdaST7789: //Standard Adafruit ST7789 Display
+            ST7789.print("[");
+            ST7789.setTextColor(Color);
+            ST7789.print(Level);
+            ST7789.setTextColor(0xFFFFFF);
+            ST7789.println("] " + Message);
+            break;
+    }
 }

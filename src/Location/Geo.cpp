@@ -15,15 +15,15 @@ String WeatherCache = ""; //Previously attained Weather.
 
 void GetLocation(){
     if (EnableGeolocation) {
-        Log("Geolocation disabled.", LogLevel::Warn);
+        Log("Geoloc disabled.", LogLevel::Warn);
         return;
     }
 
-    Log("Getting location...", LogLevel::Info);
+    Log("Getting loc...", LogLevel::Info);
     if (WiFi.status() == WL_CONNECTED) {
         location_t loc = location.getGeoFromWiFi();
     }
-    else { Log("No WiFi connection.", LogLevel::Error); }
+    else { Log("No WiFi.", LogLevel::Error); }
 }
 
 void GetWeather(){

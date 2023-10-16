@@ -4,7 +4,7 @@
 String* GetTime(String (&timeArray)[2]) {
   struct tm timeinfo;
   if(!getLocalTime(&timeinfo)){
-    Serial.println("Failed to obtain time");
+    Serial.println("Failed to get time");
     return nullptr;
   }
   
