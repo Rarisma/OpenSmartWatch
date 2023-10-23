@@ -45,7 +45,7 @@ void ConnectToNetwork(String SSID, String Password){
             Log("Connection lost", LogLevel::Warn);
             break;
         case WL_DISCONNECTED:
-            Log("Disconnected.", LogLevel::Warn);
+            Log("Disconnected. (" + String(WiFi.status()) + ")", LogLevel::Warn);
             break;
         default:
             Log("WiFi Status - '" + String(WiFi.status()), LogLevel::Warn);
@@ -77,7 +77,7 @@ void GetTime(){
         }
         char timeString[20]; // Allocate space for the formatted string
         Log("Set time as " + String(timeinfo.tm_hour) + ":" + String(timeinfo.tm_min) + " " + String(timeinfo.tm_mday) 
-        + "/" + String(timeinfo.tm_mon) + "/" + String((timeinfo.tm_year + 1900)), LogLevel::Info);
+        + "/" + String(timeinfo.tm_mon++) + "/" + String((timeinfo.tm_year + 1900)), LogLevel::Info);
     }
-    else {    Log("Can't set NTP without WiFi", LogLevel::Warn); }
+    else { Log("Can't set NTP without WiFi", LogLevel::Warn); }
 }

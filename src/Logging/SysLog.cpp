@@ -3,6 +3,7 @@
 #include "Arduino.h"
 #include "LogLevel.h"
 #include "Display\Display.h"
+#include "System\RealTimeClock.h"
 
 bool SerialInitalised = false; //Will initalise serial and then set to true.
 bool LogToDisplay = false; //Shows log messages on display.
@@ -16,29 +17,26 @@ void Log(String Message, LogLevel level) {
     switch (level) {
         case LogLevel::Debug:
             Prefix += "DBG";
-            Color = 0x332E3C;
+            Color = 0x001F;  // Blue
             break;
         case LogLevel::Info:
             Prefix += "INF";
             break;
         case LogLevel::Warn:
             Prefix += "WRN";
-            Color =  0xDD6E42;
+            Color = 0xFFE0;  // Yellow
             break;
         case LogLevel::Error:
             Prefix += "ERR";
-            Color = 0xC40B0B;
+            Color = 0xF800;  // Red
             break;
         case LogLevel::Fatal:
             Prefix += "FTL";
-            Color = 0xCE1483;
+            Color = 0xF81F;  // Purple (suggested for Fatal)
             break;
     }
 
-    //Get time, then build a MM/DD HH:MM timestamp.
-    struct tm timeinfo;
-    String Timestamp = String(timeinfo.tm_mday) + "/" + String(timeinfo.tm_mon) + " " + 
-    String(timeinfo.tm_hour) + ":" + String(timeinfo.tm_min) + ":" + String(timeinfo.tm_sec);
+    String Timestamp =" "; //GetTime() + "  " + GetDate();
 
     if (LogToDisplay)
     {

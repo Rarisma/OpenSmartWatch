@@ -58,6 +58,15 @@ void PrintToDisplay (String Message){
     }
 }
 
+void ClearDisplay(){
+    switch (Display){
+        case DisplayType::AdaST7789:
+            ST7789.setTextColor(0xFFFFFF);
+            break;
+    }
+}
+
+
 /// @brief This prints a syslog message to the display with coloring.
 /// @param Message Message to be shown
 void ShowLog (String Message, String Level, int Color){

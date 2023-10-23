@@ -7,8 +7,8 @@ constexpr const char* Branch = "MINIMA";
 
 /* ReleaseName Idea's / history
     There's no hard rules on what can be a version name but it should relate to
-    music in some way or form such as being the name of an album or song.
-    Here is the list of every release name:
+    music in some way i.e being the name of an album or song.
+    List of every release name:
 
     ==Progenitor==
     Beautiful Star (Kick Back - Kenshi Yonezu) - Progenitor Revision C
@@ -27,6 +27,6 @@ constexpr const char* Branch = "MINIMA";
     Hiscore (Pandas eyes.)
     Overkill (riot)
     All these things (mario resto)
-    Aria Of the Soul (Atlus)
+    CLoudspotter (foo fighters)
 */
 #endif 

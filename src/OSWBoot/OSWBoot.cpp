@@ -11,4 +11,9 @@ void Initalise(){
     PrintBootScreen();
     ConnectToNetwork(DefaultWiFiSSID,DefaultWiFiPass);
     GetTime();
+    
+    if (DelayBoot != 0)
+    {
+        Log("Delay Boot enabled, waiting " + String(DelayBoot) + "ms", LogLevel::Info);
+    }
 }
