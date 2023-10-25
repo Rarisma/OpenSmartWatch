@@ -7,6 +7,7 @@
 #include <HTTPClient.h> //Used for accessing Open Weather Map API
 #include <ArduinoJson.h> //Parsing data attained from Open Weather
 #include "math.h" //rounding temp to 1dp
+#include "Arduino.h"
 
 //Conver GoogleMapsAPIKey to key for some reason we can't just String(GoogleMapsAPIKey)
 String Key = String(GoogleMapsAPIKey);
@@ -26,8 +27,7 @@ void GetLocation(){
     else { Log("No WiFi.", LogLevel::Error); }
 }
 
-void GetWeather(){
-    //TODO: ADD GEO TIMER CHECK
+String GetWeather() {
     if (WiFi.status() == WL_CONNECTED && EnableGeolocation) {
         location_t loc = location.getGeoFromWiFi();
         HTTPClient http;
@@ -45,12 +45,12 @@ void GetWeather(){
             String location = doc["name"];
             String main_weather = doc["weather"][0]["main"];
 
-            WeatherCache = "   " + location.substring(0,4) + " " + main_weather + " (" + String(int(temp)) + (char)247 + "C)";
+            return location/*.substring(0,4)*/ + " " + main_weather + " (" + String(int(temp)) + (char)247 + "C)";
         } 
         else 
         {
             Serial.println("Error: " + httpResponseCode); 
-            WeatherCache = "     ???? None (0" + String((char)247) + "C)";
+            WeatherCache = "Can't get the weather or location here.";
         }
         http.end();
     }

@@ -6,6 +6,7 @@
 #include <Adafruit_ST7789.h> // Hardware-specific library for ST7789
 #include <SPI.h>
 #include <System\SystemInfo.h>
+#include "Location\Geo.h"
 
 // Adafruit Display
 Adafruit_ST7789 ST7789 = Adafruit_ST7789(DisplayCSPin, DisplayDCPin, DisplayRSTPin);
@@ -46,11 +47,20 @@ void PrintBootScreen(){
 /// @param Message Message to be shown
 /// @param FontSize Text size of message
 /// @param NewLine Tack on a \n char?
-void PrintToDisplay (String Message, int FontSize = 2, bool Newline = true){
+/// @param X Xcoord where to place it (You should also specify X.)
+/// @param Y Ycoord where to place it (You should also specify Y.)
+void PrintToDisplay (String Message, int FontSize = 2, bool Newline = true, int X=-1,int Y=-1, int Color=0xFFFFFF){
     switch (Display)
     {
         case DisplayType::AdaST7789: //Standard Adafruit ST7789 Display
             ST7789.setTextSize(FontSize);
+            ST7789.setTextColor(Color); //Sets text to color (defaults to white.).
+
+            //Sets cursor if X/Y vars are set.
+            if (X != -1 || Y != -1){
+                //Fail safe, to use the current x/y coords if only one is set.
+                ST7789.setCursor(X != -1 ? X :ST7789.getCursorX(), Y != -1 ? Y :ST7789.getCursorY());
+            }
 
             //Prints message (adds \n if NewLine is true)
             ST7789.print((Newline) ? Message + "\n" : Message);

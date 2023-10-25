@@ -3,6 +3,8 @@
 #include "Logging\SysLog.h"
 #include "System\TimeUtils.h"
 #include "WatchFace.h"
+#include "WiFi.h"
+#include "Location\Geo.h"
 
 //I don't like putting non code related comments here
 //but I really wanted to document the fact that I wanted
@@ -18,7 +20,7 @@
 void ShowWatchFace(){
     Log("Welcome to TimeSquare", LogLevel::Info); //Yes this is just a pun.
     LogToDisplay = false; //Stops log messages showing on display.
-    delay(100);
+    delay(1000);
     ClearDisplay(); //Clears logs.
     PrintTime(WatchDisplayType::StandardTime);
 }
@@ -27,6 +29,7 @@ void ShowWatchFace(){
 /// @param type How time will be shown.
 void PrintTime(WatchDisplayType type)
 {
+    Log("Printing the time as " + String(type), LogLevel::Info);
     String Time = GetTheTime();
     switch (type)
     {
@@ -36,6 +39,13 @@ void PrintTime(WatchDisplayType type)
             PrintToDisplay(String(Time[1]), 15, false);
             break;
         case StandardTime:
-            PrintToDisplay(Time, 15);
+            String STime = String(Time[0]) + String(Time[1]) + String('\n') + String(Time[3]) + String(Time[4]);
+            Log(String("Printing " + STime), LogLevel::Info);
+            int WifiColor = WiFi.status() == WL_CONNECTED ? 0x07E0 : 0xFFFF; //Green if connected.
+            PrintToDisplay("WiFi",1,false,20,8, WifiColor);
+            PrintToDisplay(GetTheDate(), 2, false, 60, 0);
+            PrintToDisplay(String(Time[0]) + String(Time[1]), 13, false, 40, 30);
+            PrintToDisplay(String(Time[3]) + String(Time[4]), 13, false, 40, 130);
+            PrintToDisplay(GetWeather(),1,false,60,240);
     }
 }

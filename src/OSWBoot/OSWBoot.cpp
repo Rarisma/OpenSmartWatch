@@ -14,11 +14,11 @@ void Initalise(){
     PrintBootScreen();
     ConnectToNetwork(DefaultWiFiSSID,DefaultWiFiPass);
     GetTime();
-    Log("Current Time:" + GetTheTime() + " Current Date:" + GetTheDate(), LogLevel::Info);
+    Log("Time:" + GetTheTime() + " Date:" + GetTheDate(), LogLevel::Info);
 
     if (DelayBoot != 0)
     {
-        Log("Delay Boot enabled, waiting " + String(DelayBoot) + "ms", LogLevel::Info);
+        Log("BootDelay enabled, waiting " + String(DelayBoot) + "ms", LogLevel::Info);
         delay(DelayBoot);
     }
 
