@@ -37,6 +37,6 @@ extern DisplayType Display;
 extern int DisplayCSPin;
 extern int DisplayRSTPin;
 extern int DisplayDCPin;
-extern int DisplaySD;
+extern int DisplaySDPin;
 
 #endif // OSW_FLAGS_H
