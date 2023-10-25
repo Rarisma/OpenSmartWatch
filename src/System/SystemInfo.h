@@ -19,14 +19,12 @@ constexpr const char* Branch = "MINIMA";
     1.1.0 - Time Out (DJ Hoppa)
 
     Ideas
-    Freeverse (Ekoh)
-    Cool Soda (Macross)
-    24hr party people (2mello)
+    Freeverse (Ekoh)                Cool Soda (Macross)
+    Way Home (Chris Webby)          Overkill (riot)
+    24hr party people (2mello)      Hiscore (Pandas eyes.)
     Echos, Silence, Patience & Grace (Foo Fighters)
-    Way Home (Chris Webby)
-    Hiscore (Pandas eyes.)
-    Overkill (riot)
     All these things (mario resto)
     CLoudspotter (foo fighters)
+    Reckless Tongue
 */
 #endif 

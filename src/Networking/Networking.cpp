@@ -24,7 +24,7 @@ void ConnectToNetwork(String SSID, String Password){
 
     Log("Connecting...", LogLevel::Info);
 
-    delay(2000);
+    delay(5000);
 
     Log("Querying...", LogLevel::Info);
 
@@ -75,9 +75,6 @@ void GetTime(){
             Log("Failed to retrieve time info", LogLevel::Error);
             return;
         }
-        char timeString[20]; // Allocate space for the formatted string
-        Log("Set time as " + String(timeinfo.tm_hour) + ":" + String(timeinfo.tm_min) + " " + String(timeinfo.tm_mday) 
-        + "/" + String(timeinfo.tm_mon++) + "/" + String((timeinfo.tm_year + 1900)), LogLevel::Info);
     }
     else { Log("Can't set NTP without WiFi", LogLevel::Warn); }
 }

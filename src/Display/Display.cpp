@@ -10,6 +10,10 @@
 // Adafruit Display
 Adafruit_ST7789 ST7789 = Adafruit_ST7789(DisplayCSPin, DisplayDCPin, DisplayRSTPin);
 
+/// @brief This initalises the display.
+/// For this to function properly you must have set the correct
+/// Display in flags.cpp as OSW WILL NOT detect the display
+/// This probably won't be bad if you mess it but I wouldn't.
 void InitaliseDisplay(){
     switch (Display)
     {
@@ -24,23 +28,14 @@ void InitaliseDisplay(){
     LogToDisplay = true;
 }
 
-void PrintHomeScreen(){
-    LogToDisplay = false;
-    switch (Display)
-    {
-        case DisplayType::AdaST7789: //Standard Adafruit ST7789 Display
-            ST7789.setTextColor(ST77XX_WHITE, ST77XX_BLACK);  
-            ST7789.setCursor(40,20);
-            break;
-    }
-}
-
+/// @brief Prints a Welcome to OSW message showing
+///the build name and number.
 void PrintBootScreen(){
     switch (Display)
     {
         case DisplayType::AdaST7789: //Standard Adafruit ST7789 Display
             ST7789.setTextColor(ST77XX_WHITE, ST77XX_BLACK);  
-            ST7789.setCursor(40,20);
+            ST7789.setCursor(80,10);
             ST7789.println("OpenSW - " + String(Branch)  + "!");
             ST7789.println(" V: " + String(ReleaseName) + "  " + Version[0] + "." + Version[1] + "." + Version[2]);
             break;
@@ -49,23 +44,30 @@ void PrintBootScreen(){
 
 /// @brief This prints a line to the display
 /// @param Message Message to be shown
-void PrintToDisplay (String Message){
+/// @param FontSize Text size of message
+/// @param NewLine Tack on a \n char?
+void PrintToDisplay (String Message, int FontSize = 2, bool Newline = true){
     switch (Display)
     {
         case DisplayType::AdaST7789: //Standard Adafruit ST7789 Display
-            ST7789.println(Message);
+            ST7789.setTextSize(FontSize);
+
+            //Prints message (adds \n if NewLine is true)
+            ST7789.print((Newline) ? Message + "\n" : Message);
             break;
     }
 }
 
-void ClearDisplay(){
+/// @brief Clears the display and resets cursor to 0,0.
+/// @param Color Color to fill display with (defaults to black.)
+void ClearDisplay(int Color = 0x00000){
     switch (Display){
         case DisplayType::AdaST7789:
-            ST7789.setTextColor(0xFFFFFF);
+            ST7789.fillScreen(Color);
+            ST7789.setCursor(0,0);
             break;
     }
 }
-
 
 /// @brief This prints a syslog message to the display with coloring.
 /// @param Message Message to be shown
@@ -76,7 +78,7 @@ void ShowLog (String Message, String Level, int Color){
             ST7789.print("[");
             ST7789.setTextColor(Color);
             ST7789.print(Level);
-            ST7789.setTextColor(0xFFFFFF);
+            ST7789.setTextColor(0xFFFF);
             ST7789.println("] " + Message);
             break;
     }

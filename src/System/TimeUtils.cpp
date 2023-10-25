@@ -1,11 +1,10 @@
 #include <Arduino.h>
 #include <time.h>
-#include <Logging\SysLog.h>
 
-String GetTime(String (&timeArray)[2]) {
+String GetTheTime() {
   struct tm timeinfo;
   if(!getLocalTime(&timeinfo)){
-    Serial.println("Failed to get time");
+    //Serial.println("Failed to get time");
     return "ER:OR";
   }
   
@@ -18,11 +17,11 @@ String GetTime(String (&timeArray)[2]) {
   return hr + ":" + minute;
 }
 
-String GetDate(){
+String GetTheDate(){
     struct tm timeinfo;
     if(!getLocalTime(&timeinfo)){
-      Log("Failed to retrieve time info", LogLevel::Error);
+      //Log("Failed to retrieve time info", LogLevel::Error);
       return "";
     }
-    return String(timeinfo.tm_mday) + "/" + String(timeinfo.tm_mon++) + "/" + String((timeinfo.tm_year + 1900));
+    return String(timeinfo.tm_mday) + "/" + String((timeinfo.tm_mon+1)) + "/" + String((timeinfo.tm_year + 1900));
 }

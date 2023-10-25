@@ -3,7 +3,7 @@
 #include "Arduino.h"
 #include "LogLevel.h"
 #include "Display\Display.h"
-#include "System\RealTimeClock.h"
+#include "System\TimeUtils.h"
 
 bool SerialInitalised = false; //Will initalise serial and then set to true.
 bool LogToDisplay = false; //Shows log messages on display.
@@ -36,7 +36,7 @@ void Log(String Message, LogLevel level) {
             break;
     }
 
-    String Timestamp =" "; //GetTime() + "  " + GetDate();
+    String Timestamp = ""; //GetTheTime() + "  " + GetTheDate();
 
     if (LogToDisplay)
     {

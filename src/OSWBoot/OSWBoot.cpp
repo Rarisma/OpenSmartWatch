@@ -4,6 +4,9 @@
 #include "Display\Display.h"
 #include "Networking\Networking.h"
 #include "OSWBoot\Flags.h"
+#include "System\TimeUtils.h"
+#include "Apps\TimeSquare\WatchFace.h"
+
 //This initalises the hardware RTC etc.
 void Initalise(){
     Log("Welcome to OpenSmartWatch " + String(Branch) + "\nV: " + String(ReleaseName), LogLevel::Info);
@@ -11,9 +14,14 @@ void Initalise(){
     PrintBootScreen();
     ConnectToNetwork(DefaultWiFiSSID,DefaultWiFiPass);
     GetTime();
-    
+    Log("Current Time:" + GetTheTime() + " Current Date:" + GetTheDate(), LogLevel::Info);
+
     if (DelayBoot != 0)
     {
         Log("Delay Boot enabled, waiting " + String(DelayBoot) + "ms", LogLevel::Info);
+        delay(DelayBoot);
     }
+
+    //Starts TimeSquare app.
+    ShowWatchFace();
 }
