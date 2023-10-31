@@ -9,6 +9,23 @@
 #include "math.h" //rounding temp to 1dp
 #include "Arduino.h"
 
+struct WeatherData {
+  float temperature;
+  float feelsLikeTemperature;
+  int relativeHumidity;
+  String weatherCondition;
+  int cloudCoverage;
+  float windSpeed;
+  int windDirection;
+  float precipitationChance;
+  float lastHourRainVolume;
+  String dateTimeText;
+  String cityName;
+  int cityPopulation;
+  unsigned long sunriseTime;
+  unsigned long sunsetTime;
+};
+
 //Conver GoogleMapsAPIKey to key for some reason we can't just String(GoogleMapsAPIKey)
 String Key = String(GoogleMapsAPIKey);
 WifiLocation location(Key);
@@ -54,4 +71,46 @@ String GetWeather() {
         }
         http.end();
     }
+}
+
+
+/// @brief This gets the next 4 days of weather, hour by hour.
+/// @return Returns a Multidimensional array containing the: 
+/// Date, Overall Weather and another array containing 
+/// The time, weather for that time and temp.
+/// Example ["27/10/2023", "Sunny", [["12:00", "Cloudy", "20"],["13:00","Sunny","20"]]
+WeatherData getWeatherData() {
+  WeatherData weatherDat;
+  
+  // HTTP GET request
+  HTTPClient http;
+  http.begin("TODO") //ToDo: add URL;
+  int httpResponseCode = http.GET();
+  
+  if (httpResponseCode > 0) {
+    String payload = http.getString();
+    
+    // JSON parsing
+    StaticJsonDocument<2048> jsonDoc;
+    deserializeJson(jsonDoc, payload);
+
+    weatherDat.temperature = jsonDoc["list"][0]["main"]["temp"];
+    weatherDat.feelsLikeTemperature = jsonDoc["list"][0]["main"]["feels_like"];
+    weatherDat.relativeHumidity = jsonDoc["list"][0]["main"]["humidity"];
+    weatherDat.weatherCondition = jsonDoc["list"][0]["weather"][0]["main"];
+    weatherDat.cloudCoverage = jsonDoc["list"][0]["clouds"]["all"];
+    weatherDat.windSpeed = jsonDoc["list"][0]["wind"]["speed"];
+    weatherDat.windDirection = jsonDoc["list"][0]["wind"]["deg"];
+    weatherDat.precipitationChance = jsonDoc["list"][0]["pop"];
+    weatherDat.lastHourRainVolume = jsonDoc["list"][0]["rain"]["1h"];
+    weatherDat.dateTimeText = jsonDoc["list"][0]["dt_txt"];
+    weatherDat.cityName = jsonDoc["city"]["name"];
+    weatherDat.cityPopulation = jsonDoc["city"]["population"];
+    weatherDat.sunriseTime = jsonDoc["city"]["sunrise"];
+    weatherDat.sunsetTime = jsonDoc["city"]["sunset"];
+  }
+  
+  http.end();
+  
+  return weatherDat;
 }

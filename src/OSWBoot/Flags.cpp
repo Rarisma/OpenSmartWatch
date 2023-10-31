@@ -32,7 +32,7 @@ int GMTOffset = 0; //Seconds offset from GMT (For example GMT+1/CEST would be 36
 bool DaylightSavings = true; //Set to true if you are in a reigion observing DST/BST ect.
 
 //Experemental Settings 
-//Many of these aren't implemented and are more idea's concepts currently\
+//Many of these aren't implemented and are more idea's concepts currently
 bool EnableOTAMenu = true; //Allows OTA's. //Not implemented.
 bool EnableSDCard = true; //Scans for SDCards on boot. // Not Implemented.
 int NumberOfButtons = 4; //Ammount of physical buttons //Not Implemented.

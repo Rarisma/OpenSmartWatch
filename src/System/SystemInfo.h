@@ -17,7 +17,8 @@ constexpr const char* Branch = "MINIMA";
     ==MINIMA== 
     1.0.0 - Exhibition Prototype Ultra (K-Rino) -  (I really like this name)
     1.1.0 - Time Out (DJ Hoppa)
-
+    1.2.0 - Reckless Tongue (Airways)
+    
     Ideas
     Freeverse (Ekoh)                Cool Soda (Macross)
     Way Home (Chris Webby)          Overkill (riot)
@@ -25,6 +26,5 @@ constexpr const char* Branch = "MINIMA";
     Echos, Silence, Patience & Grace (Foo Fighters)
     All these things (mario resto)
     CLoudspotter (foo fighters)
-    Reckless Tongue
 */
 #endif 
