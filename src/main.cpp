@@ -4,12 +4,14 @@
 #include <System\SystemInfo.h>
 #include <Logging\SysLog.h>
 
-
-
-void setup() {
-  Initalise();   
+/// @brief Calls OSWBoot.Initalise()
+void setup() 
+{
+    Serial.begin(115200);
+    Serial.println("RECKLESS TONGUE");
+    Initalise();
 }
 
-void loop() {
 
-}
+/// @brief Ignore this, follow OSWBoot.Initalise()
+void loop() { }

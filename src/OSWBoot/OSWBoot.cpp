@@ -6,7 +6,8 @@
 #include "OSWBoot\Flags.h"
 #include "System\TimeUtils.h"
 #include "Apps\TimeSquare\WatchFace.h"
-#include "esp_sleep.h"
+#include <esp_sleep.h>
+#include "OSWBoot.h"
 
 //This initalises the hardware RTC etc.
 void Initalise(){
@@ -29,7 +30,8 @@ void Initalise(){
 
     Log("Init complete, Downclocking to 24MHz",LogLevel::Info);
     setCpuFrequencyMhz(24);
-    esp_sleep_enable_light_sleep_after(100);
+    
+    //esp_sleep_enable_light_sleep_after(100); // this will sleep the cpu after 100ms.
 
     //Starts TimeSquare app.
     ShowWatchFace();

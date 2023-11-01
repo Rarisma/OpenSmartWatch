@@ -42,7 +42,7 @@ bool LogToNetwork = false; //Logs to Network server //not implemented.
 #include <Display\DisplayType.h>
 int DisplayWidth = 240;  //Display Width in pixels
 int DisplayHeight = 280; //Display Height in pixels
-DisplayType Display = DisplayType::AdaST7789; //Display Vendor/Type
+DisplayType Display = DisplayType::JustPrintToSerial; //Display Vendor/Type
 
 //ST7789 Pins
 int DisplayCSPin = 15;

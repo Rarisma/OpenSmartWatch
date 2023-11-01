@@ -79,12 +79,13 @@ String GetWeather() {
 /// Date, Overall Weather and another array containing 
 /// The time, weather for that time and temp.
 /// Example ["27/10/2023", "Sunny", [["12:00", "Cloudy", "20"],["13:00","Sunny","20"]]
+/*
 WeatherData getWeatherData() {
   WeatherData weatherDat;
   
   // HTTP GET request
   HTTPClient http;
-  http.begin("TODO") //ToDo: add URL;
+  http.begin("TODO"); //ToDo: add URL;
   int httpResponseCode = http.GET();
   
   if (httpResponseCode > 0) {
@@ -113,4 +114,4 @@ WeatherData getWeatherData() {
   http.end();
   
   return weatherDat;
-}
+}*/

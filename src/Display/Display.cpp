@@ -23,6 +23,9 @@ void InitaliseDisplay(){
             ST7789.init(240, 280);
             ST7789.fillScreen(ST77XX_BLACK);
             break;
+        case DisplayType::JustPrintToSerial:
+            Log("Using serial as 'display', this should be for testing only", LogLevel::Warn);
+            break;
     }
     
     Log("Disp initalised.", LogLevel::Info);
@@ -39,6 +42,10 @@ void PrintBootScreen(){
             ST7789.setCursor(80,10);
             ST7789.println("OpenSW - " + String(Branch)  + "!");
             ST7789.println(" V: " + String(ReleaseName) + "  " + Version[0] + "." + Version[1] + "." + Version[2]);
+            break;
+        case DisplayType::JustPrintToSerial:
+            Log("OpenSW - " + String(Branch)  + "!",LogLevel::Info);
+            Log("Ver: " + String(ReleaseName) + "  " + Version[0] + "." + Version[1] + "." + Version[2], LogLevel::Info);
             break;
     }
 }
@@ -65,6 +72,11 @@ void PrintToDisplay (String Message, int FontSize = 2, bool Newline = true, int 
             //Prints message (adds \n if NewLine is true)
             ST7789.print((Newline) ? Message + "\n" : Message);
             break;
+        
+        //Serial doesn't support formatting.
+        case DisplayType::JustPrintToSerial:
+            Log(Message, LogLevel::Warn);
+            break;
     }
 }
 
@@ -75,6 +87,9 @@ void ClearDisplay(int Color = 0x00000){
         case DisplayType::AdaST7789:
             ST7789.fillScreen(Color);
             ST7789.setCursor(0,0);
+            break;
+        case DisplayType::JustPrintToSerial:
+            Log("Serial doesn't support color calls, attempted to set display to " +  Color, LogLevel::Error);
             break;
     }
 }
@@ -90,6 +105,9 @@ void ShowLog (String Message, String Level, int Color){
             ST7789.print(Level);
             ST7789.setTextColor(0xFFFF);
             ST7789.println("] " + Message);
+            break;
+        case DisplayType::JustPrintToSerial:
+            //do nothing since we've already logged.
             break;
     }
 }

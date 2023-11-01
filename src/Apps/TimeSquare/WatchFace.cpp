@@ -5,7 +5,6 @@
 #include "WatchFace.h"
 #include "WiFi.h"
 #include "Location\Geo.h"
-
 //I don't like putting non code related comments here
 //but I really wanted to document the fact that I wanted
 //a clever name for the watch face so i asked chat gpt for one
@@ -31,6 +30,8 @@ void PrintTime(WatchDisplayType type)
 {
     Log("Printing the time as " + String(type), LogLevel::Info);
     String Time = GetTheTime();
+    if (DisplayType)
+
     switch (type)
     {
         case HrsBigMinsMid:
