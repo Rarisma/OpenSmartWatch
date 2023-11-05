@@ -36,8 +36,6 @@ void Log(String Message, LogLevel level) {
             break;
     }
 
-    String Timestamp = ""; //GetTheTime() + "  " + GetTheDate();
-
     if (LogToDisplay)
     {
         ShowLog(Message, Prefix, Color);
@@ -51,5 +49,5 @@ void Log(String Message, LogLevel level) {
     }
 
     //Log to Serial
-    Serial.println("[" + Prefix + " " + Timestamp + "]  -  " + Message );
+    Serial.println("[" + Prefix  + "]  -  " + Message );
 }

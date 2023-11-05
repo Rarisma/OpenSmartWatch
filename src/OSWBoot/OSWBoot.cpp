@@ -28,8 +28,8 @@ void Initalise(){
         delay(DelayBoot);
     }
 
-    Log("Init complete, Downclocking to 24MHz",LogLevel::Info);
-    setCpuFrequencyMhz(24);
+    Log("Init complete, Downclocking to 80MHz",LogLevel::Info);
+    setCpuFrequencyMhz(80);
     
     //esp_sleep_enable_light_sleep_after(100); // this will sleep the cpu after 100ms.
 
@@ -45,7 +45,7 @@ void ShowPowerOnCause(){
         Log("Wake Reason: GPIO", LogLevel::Info);
       break;
     case ESP_SLEEP_WAKEUP_TIMER:
-        Log("Wake Reason: Power On", LogLevel::Info);
+        Log("Wake Reason: Power On from sleep", LogLevel::Info);
       break;
     default:
         Log("Wake Reason: Power On", LogLevel::Info);

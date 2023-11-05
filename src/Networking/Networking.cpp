@@ -60,8 +60,8 @@ void GetTime(){
     if (WiFi.status() == WL_CONNECTED){
         
         //Connect to network
-        //configTime(GMTOffset, DaylightSavings ? 3600 : 0, "pool.ntp.org");
-        configTime(GMTOffset, 3600, "pool.ntp.org");
+        int DSTOffset = DaylightSavings ? 3600 : 0;
+        configTime(GMTOffset, DSTOffset, "pool.ntp.org");
         time_t now = time(nullptr);
         //Wait until time has been properly set.
         while (now < 8 * 3600 * 2)

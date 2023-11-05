@@ -5,12 +5,11 @@
 #include "WatchFace.h"
 #include "WiFi.h"
 #include "Location\Geo.h"
-//I don't like putting non code related comments here
-//but I really wanted to document the fact that I wanted
-//a clever name for the watch face so i asked chat gpt for one
-//and gave me time square, i asked for an initaliser func name
-//and got square up, I really wanna use that.
+#include "OSWBoot\Flags.h"
+#include "OSWBoot\APIKeys.h"
 
+String WeatherCache = "";
+time_t LastWeatherUpdate = 0;    
 /// @brief Calling this function will do the following:
 /// 1) Clear the screen 
 /// 2) Unload anything before
@@ -28,9 +27,25 @@ void ShowWatchFace(){
 /// @param type How time will be shown.
 void PrintTime(WatchDisplayType type)
 {
-    Log("Printing the time as " + String(type), LogLevel::Info);
     String Time = GetTheTime();
-    if (DisplayType)
+    Log("Printing the time as " + Time, LogLevel::Info);
+    int WifiColor = WiFi.status() == WL_CONNECTED ? 0x07E0 : 0xFFFF; //Green if connected.
+    ClearDisplay(); 
+
+    if (AllowWeather && OpenWeatherMapAPIKey != "") 
+    {
+        time_t now;
+        time(&now); // Obtain current time
+        int LastUpdate = now - LastWeatherUpdate;
+        Log("LastUpdate is " + String(LastUpdate), LogLevel::Info);
+        if (WeatherCache == "" || LastUpdate >= 900)
+        {
+            Log("WeatherCache is outdated, updating it", LogLevel::Info);
+            WeatherCache = GetWeather();
+            time(&now);
+            LastWeatherUpdate = now; 
+        }
+    }
 
     switch (type)
     {
@@ -39,14 +54,52 @@ void PrintTime(WatchDisplayType type)
             PrintToDisplay(String(Time[4] + Time[5]), 4, false);
             PrintToDisplay(String(Time[1]), 15, false);
             break;
-        case StandardTime:
-            String STime = String(Time[0]) + String(Time[1]) + String('\n') + String(Time[3]) + String(Time[4]);
-            Log(String("Printing " + STime), LogLevel::Info);
-            int WifiColor = WiFi.status() == WL_CONNECTED ? 0x07E0 : 0xFFFF; //Green if connected.
+        case BigTime:
+            Log(String("Printing " + Time), LogLevel::Info);
             PrintToDisplay("WiFi",1,false,20,8, WifiColor);
             PrintToDisplay(GetTheDate(), 2, false, 60, 0);
             PrintToDisplay(String(Time[0]) + String(Time[1]), 13, false, 40, 30);
             PrintToDisplay(String(Time[3]) + String(Time[4]), 13, false, 40, 130);
-            PrintToDisplay(GetWeather(),1,false,60,240);
+            if (AllowWeather) 
+            {
+                String AlignedWeatherCache = "";
+                for (int i = 0; i < ((GetTextWidth(String(Time[3]) + String(Time[4]), 13)  / 5) - (GetTextWidth(WeatherCache, 1) / 5)); ++i) {
+                    AlignedWeatherCache =+  " ";
+                }
+                PrintToDisplay(AlignedWeatherCache + WeatherCache,1,false,60,240);
+            }
+            break;
+        case StandardTime:
+            PrintToDisplay("WiFi " + String(WiFi.status() == WL_CONNECTED ? "Connected" : "Disconnected") ,1,false, 50,80, WifiColor);
+            PrintToDisplay(Time,5,false,50,100);
+            if (AllowWeather) 
+            {
+                PrintToDisplay(WeatherCache,1,false,85,150);
+            }
+            break;
     }
+    WaitForNextUpdate();
+    PrintTime(type);
+}
+
+/// @brief Sleeps the code until the next time the display will need 
+/// to be updated i.e next minute.
+void WaitForNextUpdate() {
+    Log("Sleeping OSW till next update needed", LogLevel::Info);
+    struct tm timeinfo;
+    if (!getLocalTime(&timeinfo)) {
+        // Error getting time
+        return;
+    }
+
+    // Calculate the number of seconds until 10 seconds past the next minute
+    int secondsToSleep = 62 - timeinfo.tm_sec; // 60 seconds plus 10 seconds
+    if (secondsToSleep > 62 || secondsToSleep <= 10) {
+        // If we are already past the 10-second mark, wait until the next minute's 10-second mark
+        secondsToSleep -= 60;
+    }
+
+    uint64_t microsecondsToSleep = secondsToSleep * 1000000ULL;
+    esp_sleep_enable_timer_wakeup(microsecondsToSleep);
+    esp_light_sleep_start();
 }
