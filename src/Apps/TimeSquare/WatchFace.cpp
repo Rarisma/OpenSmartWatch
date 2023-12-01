@@ -7,6 +7,8 @@
 #include "Location\Geo.h"
 #include "OSWBoot\Flags.h"
 #include "OSWBoot\APIKeys.h"
+#include <esp_sleep.h>
+#include "System\input.h"
 
 String WeatherCache = "";
 time_t LastWeatherUpdate = 0;    
@@ -85,21 +87,40 @@ void PrintTime(WatchDisplayType type)
 /// @brief Sleeps the code until the next time the display will need 
 /// to be updated i.e next minute.
 void WaitForNextUpdate() {
-    Log("Sleeping OSW till next update needed", LogLevel::Info);
-    struct tm timeinfo;
-    if (!getLocalTime(&timeinfo)) {
-        // Error getting time
-        return;
-    }
+        Log("Sleeping OSW till next update needed", LogLevel::Info);
+        struct tm timeinfo;
+        if (!getLocalTime(&timeinfo)) {
+            return;  // Error getting time
+        }
+    
+        // Calculate the number of seconds until 2 seconds past the next minute
+        int secondsToSleep = 62 - timeinfo.tm_sec; // 60 seconds plus 2 seconds
+        if (secondsToSleep > 62 || secondsToSleep <= 10) {
+            secondsToSleep -= 60;
+        }
+    
 
-    // Calculate the number of seconds until 10 seconds past the next minute
-    int secondsToSleep = 62 - timeinfo.tm_sec; // 60 seconds plus 10 seconds
-    if (secondsToSleep > 62 || secondsToSleep <= 10) {
-        // If we are already past the 10-second mark, wait until the next minute's 10-second mark
-        secondsToSleep -= 60;
-    }
 
-    uint64_t microsecondsToSleep = secondsToSleep * 1000000ULL;
-    esp_sleep_enable_timer_wakeup(microsecondsToSleep);
-    esp_light_sleep_start();
+    #ifdef UseDelayBasedSleep = true
+        msToSleep = secondsToSleep * 1000;
+        while (msToSleep != 0)
+        {
+            AwaitInput(250);
+            msToSleep -= 250;
+        }
+    #else
+        uint64_t microsecondsToSleep = secondsToSleep * 1000000ULL;
+        esp_sleep_enable_timer_wakeup(microsecondsToSleep);
+        //esp_deep_sleep_enable_gpio_wakeup(BIT(D1), ESP_GPIO_WAKEUP_GPIO_HIGH);
+        esp_light_sleep_start();
+        
+        switch(esp_sleep_get_wakeup_cause())
+        {
+            case ESP_SLEEP_WAKEUP_EXT0 : WeatherCache = "Wakeup caused by external signal using RTC_IO"; break;
+            case ESP_SLEEP_WAKEUP_EXT1 : WeatherCache = "Wakeup caused by external signal using RTC_CNTL"; break;
+            case ESP_SLEEP_WAKEUP_TIMER : WeatherCache ="Wakeup caused by timer"; break;
+            case ESP_SLEEP_WAKEUP_TOUCHPAD : WeatherCache ="Wakeup caused by touchpad"; break;
+            case ESP_SLEEP_WAKEUP_ULP : WeatherCache ="Wakeup caused by ULP program"; break;
+        }
+    #endif
 }

@@ -8,12 +8,14 @@
 #include "Apps\TimeSquare\WatchFace.h"
 #include <esp_sleep.h>
 #include "OSWBoot.h"
+#include "System\input.h"
 
 //This initalises the hardware RTC etc.
 void Initalise(){
     Log("Welcome to OpenSmartWatch " + String(Branch) + "\nV: " + String(ReleaseName), LogLevel::Info);
 
     InitaliseDisplay();
+    
     //Log("Hold upper left for config", LogLevel::Info);
     //ButtonManager.ReadButtons.Contains(UL) => ConfigManager
     //delay(500); //Wait 0.5 seconds for any press.
@@ -21,11 +23,10 @@ void Initalise(){
     ShowPowerOnCause();  //Gets why we are here.
     HandleRTC();
 
-    //Todo: make this a bool and wait for a button press if true.
-    if (DelayBoot != 0)
+    if (DelayBoot)
     {
-        Log("BootDelay enabled, waiting " + String(DelayBoot) + "ms", LogLevel::Info);
-        delay(DelayBoot);
+        Log("BootDelay enabled, press anything to continue", LogLevel::Info);
+        AwaitInput();
     }
 
     Log("Init complete, Downclocking to 80MHz",LogLevel::Info);

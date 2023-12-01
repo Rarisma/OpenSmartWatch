@@ -30,8 +30,8 @@ inline String DefaultWiFiPass = "NIGHTMARE"; // Password to SSID.
 inline int GeolocationCooldown = 90; // How often to ping geo APIs in the background.
 
 // OSWBoot Settings
-inline int DelayBoot = 5000; // Delays boot by value in ms, useful for display testing.
-
+inline bool DelayBoot = true; // Delays boot until button pressed.
+inline bool SupressDebugLogs = true; // Debug logs will be ignored.
 // Experimental Settings
 // Many of these aren't implemented and are more ideas/concepts currently
 inline bool EnableOTAMenu = true; // Allows OTAs. // Not implemented.
@@ -44,6 +44,7 @@ inline bool AllowBluetooth = true; //Unimplemented, Enables Bluetooth
 //=== HARDWARE INFO ===
 // These are considered read-only.
 // To change these you will need to reflash OSW.
+const bool UseDelayBasedSleep = true; //Set true to use Delays instead of ESP32 Light Sleep
 const int DisplayWidth = 240;  // Display Width in pixels
 const int DisplayHeight = 280; // Display Height in pixels
 //To set your display type please go to Display.cpp 
@@ -55,5 +56,9 @@ const int DisplaySDPin = 5;
 const int DisplayCSPin = 21;
 const int DisplayRSTPin = 2;
 const int DisplayDCPin = 20;
+
+//Button Pins (Currently Limited to 2)
+const int ButtonAPin = 3;
+const int ButtonBPin = 4;
 
 #endif // OSWCONFIG_H
