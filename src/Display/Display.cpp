@@ -1,9 +1,9 @@
 #include "Arduino.h"
-#include "OSWBoot\Flags.h"
-#include "Logging\SysLog.h"
+#include "OSWBoot/Flags.h"
+#include "Logging/SysLog.h"
 #include <SPI.h>
-#include <System\SystemInfo.h>
-#include "Location\Geo.h"
+#include <System/SystemInfo.h>
+#include "Location/Geo.h"
 #include <Adafruit_GFX.h>    //Standard Adafruit Library
 #include <Adafruit_ST7789.h> // Hardware-specific library for ST7789
 

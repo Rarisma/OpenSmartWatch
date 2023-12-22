@@ -8,9 +8,9 @@
 /// @param lon Longnitude of the location
 /// @param lat Latitude of the Location.
 /// @return 
-String OneCall3(String lon, string lat, string APIKey)
+String OneCall3(String lon, String lat, String APIKey)
 {
-    String URL = "https://api.openweathermap.org/data/3.0/onecall?lat="+lat+"&lon="+lon+"&exclude={part}&appid=" + APIkey +"&units=metric";
+    String URL = "https://api.openweathermap.org/data/3.0/onecall?lat="+lat+"&lon="+lon+"&exclude={part}&appid="+APIKey+"&units=metric";
 
     return "";
 }

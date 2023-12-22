@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include "OSWBoot\Flags.h"
-#include "Logging\SysLog.h"
+#include "OSWBoot/Flags.h"
+#include "Logging/SysLog.h"
 
 /// @brief This initalises buttons attached to OSW
 void InitaliseInput(){

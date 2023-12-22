@@ -1,14 +1,14 @@
-#include <Logging\SysLog.h>
-#include <OSWBoot\Flags.h>
-#include <System\SystemState.h>
+#include <Logging/SysLog.h>
+#include <OSWBoot/Flags.h>
+#include <System/SystemState.h>
 #include <WiFi.h>
-#include <OSWBoot\APIKeys.h>
+#include <OSWBoot/APIKeys.h>
 #include <WifiLocation.h>
 #include <HTTPClient.h> //Used for accessing Open Weather Map API
 #include <ArduinoJson.h> //Parsing data attained from Open Weather
 #include "math.h" //rounding temp to 1dp
 #include "Arduino.h"
-#include"Networking\Networking.h"
+#include"Networking/Networking.h"
 
 struct WeatherData {
   float temperature;

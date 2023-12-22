@@ -1,7 +1,7 @@
-#include "Arduino.h"
+#include <Arduino.h>
 
 /// @brief The time this forcast is for 
-DateTime ForcastTime;
+tm ForcastTime;
 
 /// @brief Temperature at the time of forcast
 float Temp;

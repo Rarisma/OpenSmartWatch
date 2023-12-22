@@ -8,7 +8,7 @@ WEATHER
 */
 
 #include <Arduino.h>
-#include "Display\Display.h"
+#include "Display/Display.h"
 #include "vector"
 
 /// @brief Takes list of items, displays them and 

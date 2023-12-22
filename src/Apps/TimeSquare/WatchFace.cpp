@@ -1,14 +1,14 @@
 #include <Arduino.h>
-#include <Display\Display.h>
-#include "Logging\SysLog.h"
-#include "System\TimeUtils.h"
+#include <Display/Display.h>
+#include "Logging/SysLog.h"
+#include "System/TimeUtils.h"
 #include "WatchFace.h"
 #include "WiFi.h"
-#include "Location\Geo.h"
-#include "OSWBoot\Flags.h"
-#include "OSWBoot\APIKeys.h"
+#include "Location/Geo.h"
+#include "OSWBoot/Flags.h"
+#include "OSWBoot/APIKeys.h"
 #include <esp_sleep.h>
-#include "System\input.h"
+#include "System/Input.h"
 
 String WeatherCache = "";
 time_t LastWeatherUpdate = 0;    

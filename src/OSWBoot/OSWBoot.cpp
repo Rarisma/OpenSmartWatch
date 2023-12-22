@@ -1,14 +1,14 @@
 #include <Arduino.h>
-#include "Logging\SysLog.h"
-#include "System\SystemInfo.h"
-#include "Display\Display.h"
-#include "Networking\Networking.h"
-#include "OSWBoot\Flags.h"
-#include "System\TimeUtils.h"
-#include "Apps\TimeSquare\WatchFace.h"
+#include "Logging/SysLog.h"
+#include "System/SystemInfo.h"
+#include "Display/Display.h"
+#include "Networking/Networking.h"
+#include "OSWBoot/Flags.h"
+#include "System/TimeUtils.h"
+#include "Apps/TimeSquare/WatchFace.h"
 #include <esp_sleep.h>
 #include "OSWBoot.h"
-#include "System\input.h"
+#include "System/Input.h"
 
 //This initalises the hardware RTC etc.
 void Initalise(){

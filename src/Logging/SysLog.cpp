@@ -2,9 +2,9 @@
 
 #include "Arduino.h"
 #include "LogLevel.h"
-#include "Display\Display.h"
-#include "System\TimeUtils.h"
-#include "OSWBoot\Flags.h"
+#include "Display/Display.h"
+#include "System/TimeUtils.h"
+#include "OSWBoot/Flags.h"
 
 bool SerialInitalised = false; //Will initalise serial and then set to true.
 bool LogToDisplay = false; //Shows log messages on display.

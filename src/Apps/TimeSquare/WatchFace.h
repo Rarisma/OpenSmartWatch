@@ -2,8 +2,8 @@
 #define WATCHFACE_H
 
 #include <Arduino.h>
-#include "Logging\SysLog.h"
-#include "System\TimeUtils.h"
+#include "Logging/SysLog.h"
+#include "System/TimeUtils.h"
 
 /// @brief Enum for controlling how the clock will display.
 enum WatchDisplayType

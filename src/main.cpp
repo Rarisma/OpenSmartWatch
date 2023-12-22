@@ -1,8 +1,8 @@
-#include <OSWBoot\OSWBoot.h>
+#include <OSWBoot/OSWBoot.h>
 #include <WiFi.h>
 #include <Arduino.h>
-#include <System\SystemInfo.h>
-#include <Logging\SysLog.h>
+#include <System/SystemInfo.h>
+#include <Logging/SysLog.h>
 
 /// @brief Calls OSWBoot.Initalise()
 void setup() 

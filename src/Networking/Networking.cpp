@@ -5,9 +5,9 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 #include "time.h"
-#include "Logging\SysLog.h"
+#include "Logging/SysLog.h"
 #include "Arduino.h"
-#include "OSWBoot\Flags.h"
+#include "OSWBoot/Flags.h"
 #include "Arduino.h"
 #include "rtc.h"
 #include <WiFiClientSecure.h> //Fixes compilation failure relating to WifiLocation, platformIO bug.
