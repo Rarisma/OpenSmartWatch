@@ -1,9 +1,9 @@
 #include <Arduino.h>
 #include "Logging/SysLog.h"
-#include "System/SystemInfo.h"
+#include "System/Flags.h"
 #include "Display/Display.h"
 #include "Networking/Networking.h"
-#include "OSWBoot/Flags.h"
+#include "System/Flags.h"
 #include "System/TimeUtils.h"
 #include "Apps/TimeSquare/WatchFace.h"
 #include <esp_sleep.h>
@@ -16,20 +16,20 @@ void Initalise(){
 
     InitaliseDisplay();
     
-    //Log("Hold upper left for config", LogLevel::Info);
+    Log("Hold any button for config", LogLevel::Info);
     //ButtonManager.ReadButtons.Contains(UL) => ConfigManager
-    //delay(500); //Wait 0.5 seconds for any press.
+    delay(500); //Wait 0.5 seconds for any press.
     PrintBootScreen();  //Prints the welcome to OSW message to the disp.
     ShowPowerOnCause();  //Gets why we are here.
     HandleRTC();
 
     if (DelayBoot)
     {
-        Log("BootDelay enabled, press anything to continue", LogLevel::Info);
+        Log("Press Button to continue", LogLevel::Info);
         AwaitInput();
     }
 
-    Log("Init complete, Downclocking to 80MHz",LogLevel::Info);
+    Log("Boot complete! Downclocking to 80MHz",LogLevel::Info);
     setCpuFrequencyMhz(80);
     
     //esp_sleep_enable_light_sleep_after(100); // this will sleep the cpu after 100ms.

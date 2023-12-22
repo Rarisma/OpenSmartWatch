@@ -4,7 +4,7 @@
 #include "LogLevel.h"
 #include "Display/Display.h"
 #include "System/TimeUtils.h"
-#include "OSWBoot/Flags.h"
+#include "System/Flags.h"
 
 bool SerialInitalised = false; //Will initalise serial and then set to true.
 bool LogToDisplay = false; //Shows log messages on display.
@@ -17,6 +17,9 @@ void Log(String Message, LogLevel level) {
     int Color = 0xFFFFFF; //RGB in hex after the 0x part.
     switch (level) {
         case LogLevel::Debug:
+            #if !ShowDebugLogs // Supress debug logs if they aren't enabled.
+                return;
+            #endif 
             Prefix += "DBG";
             Color = 0x001F;  // Blue
             break;
@@ -37,8 +40,6 @@ void Log(String Message, LogLevel level) {
             break;
     }
     
-    //Supress debug logs if enabled.
-    if (SupressDebugLogs && level == LogLevel::Debug){ return; }
 
     if (LogToDisplay)
     {

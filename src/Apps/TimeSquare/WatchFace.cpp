@@ -5,7 +5,7 @@
 #include "WatchFace.h"
 #include "WiFi.h"
 #include "Location/Geo.h"
-#include "OSWBoot/Flags.h"
+#include "System/Flags.h"
 #include "OSWBoot/APIKeys.h"
 #include <esp_sleep.h>
 #include "System/Input.h"
@@ -99,9 +99,7 @@ void WaitForNextUpdate() {
             secondsToSleep -= 60;
         }
     
-
-
-    #ifdef UseDelayBasedSleep = true
+    #if UseDelayBasedSleep
         msToSleep = secondsToSleep * 1000;
         while (msToSleep != 0)
         {

@@ -1,5 +1,5 @@
 #include <Logging/SysLog.h>
-#include <OSWBoot/Flags.h>
+#include <System/Flags.h>
 #include <System/SystemState.h>
 #include <WiFi.h>
 #include <OSWBoot/APIKeys.h>
@@ -27,13 +27,12 @@ struct WeatherData {
   unsigned long sunsetTime;
 };
 
-//Conver GoogleMapsAPIKey to key for some reason we can't just String(GoogleMapsAPIKey)
-String Key = String(GoogleMapsAPIKey);
+String Key = GoogleMapsAPIKey;
 WifiLocation location(Key);
 
 void GetLocation(){
     if (AllowGeolocation) {
-        Log("Geoloc disabled.", LogLevel::Warn);
+        Log("loc disabled.", LogLevel::Warn);
         return;
     }
 

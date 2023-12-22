@@ -2,5 +2,5 @@
 
 #include <Arduino.h>
 
-constexpr char* GoogleMapsAPIKey = "API KEY HERE";
-constexpr char* OpenWeatherMapAPIKey = "API KEY HERE";
+const String GoogleMapsAPIKey = "API KEY HERE";
+const String OpenWeatherMapAPIKey = "API KEY HERE";

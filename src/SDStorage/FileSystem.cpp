@@ -1,10 +1,10 @@
 #include "Arduino.h"
 #include "SD.h"
-#include "OSWBoot/Flags.h"
+#include "System/Flags.h"
 #include "Logging/SysLog.h"
 
 void InitaliseSDCard() {
-    if (!SD.begin(DisplaySDPin)) {
+    if (!SD.begin(SDCardPin)) {
         Log("SD init Failed.", LogLevel::Error);
         return;
     }

@@ -1,7 +1,7 @@
 #include <OSWBoot/OSWBoot.h>
 #include <WiFi.h>
 #include <Arduino.h>
-#include <System/SystemInfo.h>
+#include <System/Flags.h>
 #include <Logging/SysLog.h>
 
 /// @brief Calls OSWBoot.Initalise()
